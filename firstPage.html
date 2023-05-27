@@ -1,65 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Texture Images</title>
+  <title>Survey for Binary Classification of Texture Images</title>
   <style>
     body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
       padding: 0;
+	  background-color:#F0F8FF;
+      font-family: Arial, sans-serif;
     }
 
     .container {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: flex-start;
-      height: 100%;
-      width: 80%;
+      background-color: #F0F8FF;
+      border-radius: 10px;
+      padding: 20px;
     }
 
     .section {
       flex: 1;
-      border-right: 1px solid black;
       padding: 10px;
-    }
-
-    .section:last-child {
-      border-right: none;
     }
 
     .image-row {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
+      margin-top: 20px;
     }
 
-    .image-row img {
-      width: calc(33.33% - 10px);
+    .image {
+      width: calc(33.33% - 20px); /* Adjusted width to account for the gap */
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 20px; /* Added margin-bottom for the gap */
+      margin-right: 20px; /* Added margin-right for the gap */
+      border-radius: 5px;
+    }
+
+    .divider {
+      width: 2px;
+      background-color: #333;
+      margin: 0 20px;
     }
 
     .heading {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
       margin-bottom: 10px;
       text-align: center;
     }
 
-    .button-container {
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
       margin-top: 20px;
     }
 
-    .button-container button {
-      padding: 10px 20px;
+    .subtitle {
       font-size: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+	.h1{
+		text-align: center;
+	}
+    .button-container button {
+      padding: 12px 24px;
+      font-size: 18px;
       background-color: #4CAF50;
       color: white;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
     }
 
@@ -70,60 +95,55 @@
   </style>
 </head>
 <body>
-  <h1 class="heading">Texture Images</h1>
+  <h1>Survey for Binary Classification of Texture Images</h1>
+  <div class="subtitle">Please look at the images and understand the differences between them before proceeding to the survey.</div>
+  
   <div class="container">
     <div class="section" id="section1">
       <h2 class="heading">Class 0</h2>
+      <div class="image-row" id="section1-images"></div>
     </div>
+    <div class="divider"></div> <!-- Divider -->
     <div class="section" id="section2">
       <h2 class="heading">Class 1</h2>
+      <div class="image-row" id="section2-images"></div>
     </div>
-  </div>
-
-  <div class="button-container">
-    <button onclick="redirectToOtherPage()">Click Here</button>
   </div>
 
   <script>
-    const section1Images = [
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg'
-    ];
+    const section1Images = [];
+    for (let i = 1; i <= 50; i++) {
+      section1Images.push(`images/image_${i}.jpg`);
+    }
 
-    const section2Images = [
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg',
-      'images/image_1.jpg'
-    ];
+    const section2Images = [];
+    for (let i = 51; i <= 100; i++) {
+      section2Images.push(`images/image_${i}.jpg`);
+    }
 
     function createImageElements(images, sectionId) {
       const section = document.getElementById(sectionId);
-      const imageRow = document.createElement('div');
-      imageRow.className = 'image-row';
-      section.appendChild(imageRow);
+      const imageRow = section.querySelector('.image-row');
+
       images.forEach((imagePath, index) => {
         const img = document.createElement('img');
+        img.className = 'image';
         img.src = imagePath;
         imageRow.appendChild(img);
-        if ((index + 1) % 3 === 0) {
-          imageRow.appendChild(document.createElement('br'));
-        }
       });
     }
 
     createImageElements(section1Images, 'section1');
     createImageElements(section2Images, 'section2');
 
-    function redirectToOtherPage() {
-      window.location.href = "index";
+    function redirectToSurvey() {
+      window.location.href = "survey.html";
     }
   </script>
+
+  <div class="button-container">
+    <button onclick="redirectToSurvey()">Click here to start the survey</button>
+  </div>
+
 </body>
 </html>
