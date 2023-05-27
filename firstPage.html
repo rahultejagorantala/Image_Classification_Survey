@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vertical Sections with Images</title>
+  <title>Texture Images</title>
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
     .container {
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
-      align-items: center;
-      height: 100vh;
+      align-items: flex-start;
+      height: 100%;
+      width: 80%;
     }
 
     .section {
       flex: 1;
-      height: 100%;
       border-right: 1px solid black;
       padding: 10px;
     }
@@ -38,25 +47,44 @@
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+
+    .button-container button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-container button:hover {
+      background-color: #45a049;
     }
 
   </style>
 </head>
 <body>
+  <h1 class="heading">Texture Images</h1>
   <div class="container">
     <div class="section" id="section1">
-        <h2 class="heading">0</h2>
-      </div>
-      <div class="section" id="section2">
-        <h2 class="heading">1</h2>
-      </div>
-  
+      <h2 class="heading">Class 0</h2>
+    </div>
+    <div class="section" id="section2">
+      <h2 class="heading">Class 1</h2>
+    </div>
   </div>
-<button onclick="redirectToOtherPage()">Click Here</button>
+
+  <div class="button-container">
+    <button onclick="redirectToOtherPage()">Click Here</button>
+  </div>
+
   <script>
-     function redirectToOtherPage() {
-      window.location.href = "index";
-    }
     const section1Images = [
       'images/image_1.jpg',
       'images/image_1.jpg',
@@ -67,7 +95,7 @@
     ];
 
     const section2Images = [
-    'images/image_1.jpg',
+      'images/image_1.jpg',
       'images/image_1.jpg',
       'images/image_1.jpg',
       'images/image_1.jpg',
@@ -92,6 +120,10 @@
 
     createImageElements(section1Images, 'section1');
     createImageElements(section2Images, 'section2');
+
+    function redirectToOtherPage() {
+      window.location.href = "index";
+    }
   </script>
 </body>
 </html>
