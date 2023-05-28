@@ -141,7 +141,7 @@
         selections: selectedOptions,
       }
 
-      axios.post('/results', { data: payload })
+      axios.post('/results_supervised', { data: payload })
         .then(() => {
           alert('Results submitted successfully.');
           results.length = 0; // Clear the results array
