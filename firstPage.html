@@ -91,6 +91,41 @@
       background-color: #45a049;
     }
 
+    #zoom-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #zoomed-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    #zoom-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery/dist/css/lightgallery.min.css">
 </head>
@@ -132,34 +167,44 @@
         img.className = 'image';
         img.src = imagePath;
         imageRow.appendChild(img);
-      });
-    }
 
-    createImageElements(section1Images, 'section1');
-    createImageElements(section2Images, 'section2');
-
-    function redirectToSurvey() {
-      window.location.href = "index";
-    }
-
-    function initializeLightGallery() {
-      const images = document.querySelectorAll('.image');
-      images.forEach((image) => {
-        image.addEventListener('click', function () {
-          lightGallery(image, {
-            dynamic: true,
-            dynamicEl: [{ src: image.src }]
-          });
+        img.addEventListener('click', () => {
+          const imageUrl = img.src;
+          zoomImage(imageUrl);
         });
       });
     }
 
-    initializeLightGallery();
+    function zoomImage(imageUrl) {
+      const zoomContainer = document.getElementById('zoom-container');
+      const zoomedImage = document.getElementById('zoomed-image');
+
+      zoomedImage.src = imageUrl;
+      zoomContainer.style.display = 'flex';
+    }
+
+    function closeZoom() {
+      const zoomContainer = document.getElementById('zoom-container');
+      zoomContainer.style.display = 'none';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      createImageElements(section1Images, 'section1');
+      createImageElements(section2Images, 'section2');
+    });
+
+    function redirectToSurvey() {
+      window.location.href = "index";
+    }
   </script>
 
   <div class="button-container">
     <button onclick="redirectToSurvey()">Click here to start the survey</button>
   </div>
 
+  <div id="zoom-container">
+    <span id="zoom-close" onclick="closeZoom()">&times;</span>
+    <img id="zoomed-image" alt="Zoomed Image">
+  </div>
 </body>
 </html>
