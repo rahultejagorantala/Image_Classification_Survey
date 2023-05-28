@@ -9,7 +9,7 @@
       align-items: center;
       margin: 0;
       padding: 0;
-	  background-color:#F0F8FF;
+      background-color: #F0F8FF;
       font-family: Arial, sans-serif;
     }
 
@@ -40,6 +40,7 @@
       margin-bottom: 20px; /* Added margin-bottom for the gap */
       margin-right: 20px; /* Added margin-right for the gap */
       border-radius: 5px;
+      cursor: pointer;
     }
 
     .divider {
@@ -75,9 +76,7 @@
       margin-top: 20px;
       margin-bottom: 20px;
     }
-	.h1{
-		text-align: center;
-	}
+
     .button-container button {
       padding: 12px 24px;
       font-size: 18px;
@@ -93,11 +92,12 @@
     }
 
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery/dist/css/lightgallery.min.css">
 </head>
 <body>
   <h1>Survey for Binary Classification of Texture Images</h1>
   <div class="subtitle">Please look at the images and understand the differences. When you are ready, proceed to the survey.</div>
-  
+  <a href="https://drive.google.com/drive/folders/1qOFuwdh2Ss7UBLApTHhUlpT_IABH9vmc?usp=sharing" class="drivelink" target="_blank">Drivelink for Images</a>
   <div class="container">
     <div class="section" id="section1">
       <h2 class="heading">Class 0</h2>
@@ -110,15 +110,17 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery/dist/js/lightgallery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lg-thumbnail/dist/lg-thumbnail.min.js"></script>
   <script>
     const section1Images = [];
     for (let i = 1; i <= 50; i++) {
-      section1Images.push(`/images/images_train/image_${i}.jpg`);
+      section1Images.push(`images_train/image_${i}.jpg`);
     }
 
     const section2Images = [];
     for (let i = 51; i <= 100; i++) {
-      section2Images.push(`/images/images_train/image_${i}.jpg`);
+      section2Images.push(`images_train/image_${i}.jpg`);
     }
 
     function createImageElements(images, sectionId) {
@@ -139,6 +141,20 @@
     function redirectToSurvey() {
       window.location.href = "index";
     }
+
+    function initializeLightGallery() {
+      const images = document.querySelectorAll('.image');
+      images.forEach((image) => {
+        image.addEventListener('click', function () {
+          lightGallery(image, {
+            dynamic: true,
+            dynamicEl: [{ src: image.src }]
+          });
+        });
+      });
+    }
+
+    initializeLightGallery();
   </script>
 
   <div class="button-container">
