@@ -15,7 +15,7 @@ app.get('/index', (req, res) => {
 });
 
 // Serve static files (images)
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images_50', express.static(path.join(__dirname, 'images_50')));
 
 // Store the results
 const results = [];
